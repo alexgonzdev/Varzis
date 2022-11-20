@@ -35,16 +35,24 @@
 
 ---
 
-
 ## How To Use
 
 - Clone the project and run it on Xcode 13 or above
 - Might have it on the appstore soon, not decided on that yet
+
 ---
 
 ## Author Info
 
 - Twitter - [@metrographies](https://twitter.com/metrographies)
 - Website - [LinkedIn: Alex Gonzalez](https://www.linkedin.com/in/alex-gonzalez-b95674211/)
+
+---
+
+## Notes
+
+- Commit history is empty due to making a new repository because of a github issue!
+
+---
 
 [Back To The Top](#Varzis)
