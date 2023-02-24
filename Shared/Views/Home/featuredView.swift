@@ -1,13 +1,9 @@
-//
-//  featured.swift
-//  Sports News (iOS)
-//
-//  Created by Alex Gonzalez on 1/15/22.
-//
-
 import SwiftUI
 import CachedAsyncImage
 import BetterSafariView
+let featuredWidth = UIScreen.screenWidth * 0.917
+let featuredHeight = UIScreen.screenHeight * 0.284
+
 struct featured: View {
     let title: String
     let imageurl: String
@@ -16,31 +12,33 @@ struct featured: View {
     var body: some View {
         ZStack {
             CachedAsyncImage(url: URL(string: imageurl)) { phase in
-                            switch phase {
-                            case .empty:
-                                ProgressView()
-                                .frame(width: 358, height: 240)
-                            case .success(let image):
-                                image.resizable()
-                                    .scaledToFill()
-                                    .frame(width: 358, height: 240)
-                                    .cornerRadius(10)
-                                    .opacity(0.5)
-                            case .failure:
-                                Image(systemName: "photo")
-                                    .resizable()
-                                    .frame(width: 358, height: 240)
-                            @unknown default:
-                                // Since the AsyncImagePhase enum isn't frozen,
-                                // we need to add this currently unused fallback
-                                // to handle any new cases that might be added
-                                // in the future:
-                                EmptyView()
-                                    .frame(width: 358, height: 240)
-                            }
-                        }
+                switch phase {
+                case .empty:
+                    ProgressView()
+                        .frame(width: featuredWidth, height: featuredHeight)
+                case .success(let image):
+                    image.resizable()
+                        .scaledToFill()
+                        .frame(width: featuredWidth, height: featuredHeight)
+                        .cornerRadius(10)
+                        .opacity(0.5)
+                case .failure:
+                    Image(systemName: "photo")
+                        .resizable()
+                        .frame(width: featuredWidth, height: featuredHeight)
+                @unknown default:
+                    // Since the AsyncImagePhase enum isn't frozen,
+                    // we need to add this currently unused fallback
+                    // to handle any new cases that might be added
+                    // in the future:
+                    EmptyView()
+                        .frame(width: featuredWidth, height: featuredHeight)
+                }
+            }
             .onTapGesture {
                 opensafari = true
+                print(UIScreen.screenHeight)
+                print(UIScreen.screenWidth)
             }
             VStack {
                 Spacer()
@@ -65,20 +63,20 @@ struct featured: View {
                 .padding(.bottom, 20)
             }
         }
-        .frame(width: 358, height: 240)
+        .frame(width: featuredWidth, height: featuredHeight)
         .cornerRadius(10)
         .padding(.horizontal)
         .safariView(isPresented: $opensafari) {
-                    SafariView(
-                        url: URL(string: url)!,
-                        configuration: SafariView.Configuration(
-                            entersReaderIfAvailable: false,
-                            barCollapsingEnabled: true
-                        )
-                    )
-                    .preferredBarAccentColor(.clear)
-                    .preferredControlAccentColor(.accentColor)
-                    .dismissButtonStyle(.done)
+            SafariView(
+                url: URL(string: url)!,
+                configuration: SafariView.Configuration(
+                    entersReaderIfAvailable: false,
+                    barCollapsingEnabled: true
+                )
+            )
+            .preferredBarAccentColor(.clear)
+            .preferredControlAccentColor(.accentColor)
+            .dismissButtonStyle(.done)
         }
     }
 }

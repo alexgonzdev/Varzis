@@ -1,10 +1,3 @@
-//
-//  News.swift
-//  Sports News (iOS)
-//
-//  Created by Alex Gonzalez on 1/19/22.
-//
-
 import Foundation
 
 enum League: String, CaseIterable {
@@ -28,7 +21,7 @@ struct News {
 }
 
 
-struct Welcome: Codable {
+struct Articles: Codable {
     let status: String
     let totalResults: Int
     let articles: [Article]
@@ -36,7 +29,8 @@ struct Welcome: Codable {
 
 struct Article: Codable, Identifiable {
     let id = UUID()
-    let title, articleDescription: String
+    let title: String
+    let articleDescription: String?
     let url: String
     let urlToImage: String?
     let publishedAt: Date
@@ -47,3 +41,4 @@ struct Article: Codable, Identifiable {
         case url, urlToImage, publishedAt
     }
 }
+

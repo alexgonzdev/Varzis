@@ -1,14 +1,12 @@
-//
-//  NewsViewViewModel.swift
-//  Sports News (iOS)
-//
-//  Created by Alex Gonzalez on 1/28/22.
-//
-
 import Foundation
 final class NewsViewViewModel: ObservableObject {
     @Published var articles: [Article] = []
     @Published var isLoading = false
+    
+    var network: Networking
+    init(networking: Networking) {
+        network = networking
+    }
     var league = League.all { didSet { getNews() }}
     
     func getNews() {

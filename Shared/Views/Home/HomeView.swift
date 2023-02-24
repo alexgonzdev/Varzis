@@ -1,16 +1,9 @@
-//
-//  Home.swift
-//  Sports News (iOS)
-//
-//  Created by Alex Gonzalez on 1/13/22.
-//
-
 import SwiftUI
 import BetterSafariView
 struct Home: View {
     @State var text = ""
     @State var isEditing = false
-    @StateObject private var viewModel = HomeViewViewModel()
+    @StateObject private var viewModel = HomeViewViewModel(networking: Network())
     @State var opensafari = false
     var body: some View {
         VStack(spacing: 0) {
@@ -22,7 +15,7 @@ struct Home: View {
                     }
                     .padding(.vertical)
                     HStack {
-                        Text("Upcoming Matches")
+                        Text("Today's Games")
                             .font(.system(size: 17, weight: .bold, design: .default))
                             .foregroundColor(.white)
                         Spacer()
@@ -37,7 +30,7 @@ struct Home: View {
             .cornerRadius(30, corners: [.topLeft, .topRight])
         }
         .onAppear {
-            viewModel.getTopNews()
+            viewModel.fetchTopNews()
         }
         .background(Color(0x1E232A))
     }

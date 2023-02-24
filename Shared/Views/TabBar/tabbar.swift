@@ -1,10 +1,3 @@
-//
-//  tabbar.swift
-//  Sports News (iOS)
-//
-//  Created by Alex Gonzalez on 1/16/22.
-//
-
 import SwiftUI
 
 import SwiftUI

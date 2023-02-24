@@ -1,11 +1,3 @@
-//
-//  NetworkManager.swift
-//  Sports News (iOS)
-//
-//  Created by Alex Gonzalez on 1/20/22.
-//
-//b2ca86c0227d4408ab170fd0aaacf239
-//40ae27dc164340af9e671e828e7faf01
 import Foundation
 
 import UIKit
@@ -32,7 +24,7 @@ class NetworkManager: NSObject {
     private override init() {}
     
     func getTopNews(completed: @escaping (Result<[Article], APError>) -> Void) {
-        guard let url = URL(string: "https://newsapi.org/v2/top-headlines?country=us&category=sports&pageSize=1&apiKey=40ae27dc164340af9e671e828e7faf01") else {
+        guard let url = URL(string: "https://newsapi.org/v2/top-headlines?country=us&category=sports&pageSize=1&apiKey=b2ca86c0227d4408ab170fd0aaacf239") else {
             completed(.failure(.invalidURL))
             return
         }
@@ -55,8 +47,8 @@ class NetworkManager: NSObject {
             
             guard let data = data else {
                 let str = String(decoding: data!, as: UTF8.self)
-                print(str)
-                print(error?.localizedDescription)
+                //print(str)
+                //print(error?.localizedDescription)
                 completed(.failure(.invalidData))
                 return
             }
@@ -70,10 +62,10 @@ class NetworkManager: NSObject {
 
                 
                 decoder.dateDecodingStrategy = .formatted(dateFormatter)
-                let decodedResponse = try decoder.decode(Welcome.self, from: data)
+                let decodedResponse = try decoder.decode(Articles.self, from: data)
                 completed(.success(decodedResponse.articles))
             } catch {
-                print(String(describing: error))
+                //print(String(describing: error))
                 completed(.failure(.invalidData))
             }
         }
@@ -85,7 +77,7 @@ class NetworkManager: NSObject {
     
     
     func getNews(for league: League, completed: @escaping (Result<[Article], APError>) -> Void) {
-        guard let url = URL(string: "https://newsapi.org/v2/everything?qInTitle=\(league.searchString)&sortBy=publishedAt&language=en&pageSize=10&apiKey=b2ca86c0227d4408ab170fd0aaacf239") else {
+        guard let url = URL(string: "https://newsapi.org/v2/everything?qInTitle=\(league.searchString)&sortBy=relevancy&language=en&pageSize=10&apiKey=b2ca86c0227d4408ab170fd0aaacf239") else {
             completed(.failure(.invalidURL))
             return
         }
@@ -101,15 +93,15 @@ class NetworkManager: NSObject {
                         
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
                 let rr = response as? HTTPURLResponse
-                print(rr?.statusCode)
+                //print(rr?.statusCode)
                 completed(.failure(.invalidResponse))
                 return
             }
             
             guard let data = data else {
                 let str = String(decoding: data!, as: UTF8.self)
-                print(str)
-                print(error?.localizedDescription)
+                //print(str)
+                //print(error?.localizedDescription)
                 completed(.failure(.invalidData))
                 return
             }
@@ -123,10 +115,10 @@ class NetworkManager: NSObject {
 
                 
                 decoder.dateDecodingStrategy = .formatted(dateFormatter)
-                let decodedResponse = try decoder.decode(Welcome.self, from: data)
+                let decodedResponse = try decoder.decode(Articles.self, from: data)
                 completed(.success(decodedResponse.articles))
             } catch {
-                print(String(describing: error))
+                //print(String(describing: error))
                 completed(.failure(.invalidData))
             }
         }
@@ -135,7 +127,7 @@ class NetworkManager: NSObject {
     }
     
     func getTeamStats(completed: @escaping (Result<[TeamStats], APError>) -> Void) {
-        guard let url = URL(string: "https://api.sportsdata.io/v3/nba/scores/json/Standings/2023?key=859db0b46ce34f3da397d718389f341a") else {
+        guard let url = URL(string: "https://api.sportsdata.io/v3/nba/scores/json/Standings/2023?key=9b4393a33b5f4abe9a936232288fb5dc") else {
             completed(.failure(.invalidURL))
             return
         }
@@ -156,8 +148,8 @@ class NetworkManager: NSObject {
             
             guard let data = data else {
                 let str = String(decoding: data!, as: UTF8.self)
-                print(str)
-                print(error?.localizedDescription)
+                //print(str)
+                //print(error?.localizedDescription)
                 completed(.failure(.invalidData))
                 return
             }
@@ -170,7 +162,7 @@ class NetworkManager: NSObject {
                 let decodedResponse = try decoder.decode([TeamStats].self, from: data)
                 completed(.success(decodedResponse))
             } catch {
-                print(String(describing: error))
+                //print(String(describing: error))
                 completed(.failure(.invalidData))
             }
         }
@@ -197,15 +189,15 @@ class NetworkManager: NSObject {
                         
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
                 let rr = response as? HTTPURLResponse
-                print(rr?.statusCode.description)
+                //print(rr?.statusCode.description)
                 completed(.failure(.invalidResponse))
                 return
             }
             
             guard let data = data else {
                 let str = String(decoding: data!, as: UTF8.self)
-                print(str)
-                print(error?.localizedDescription)
+                //print(str)
+                //print(error?.localizedDescription)
                 completed(.failure(.invalidData))
                 return
             }
@@ -222,7 +214,7 @@ class NetworkManager: NSObject {
                 let decodedResponse = try decoder.decode(Matches.self, from: data)
                 completed(.success(decodedResponse.data))
             } catch {
-                print(String(describing: error))
+                //print(String(describing: error))
                 completed(.failure(.invalidData))
             }
         }

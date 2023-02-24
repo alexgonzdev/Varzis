@@ -1,10 +1,3 @@
-//
-//  Extensions.swift
-//  Sports News (iOS)
-//
-//  Created by Alex Gonzalez on 11/14/22.
-//
-
 import Foundation
 import SwiftUI
 extension Color {
@@ -18,6 +11,8 @@ extension Color {
         )
     }
 }
+
+
 
 
 extension UIScreen{
@@ -57,6 +52,11 @@ extension View {
         clipShape(RoundedCorner(radius: radius, corners: corners))
     }
 }
+
+//let featuredWidth = UIScreen.screenWidth * 0.846
+//let featuredHeight = UIScreen.screenHeight * 0.284
+
+
 
 func shareButton(url: String, completion: @escaping (Result<UIViewController, APError>) -> Void) {
     guard let url = URL(string: url) else {

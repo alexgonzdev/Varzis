@@ -1,10 +1,3 @@
-//
-//  MatchesView.swift
-//  Sports News (iOS)
-//
-//  Created by Alex Gonzalez on 1/29/22.
-//
-
 import SwiftUI
 
 struct MatchesView: View {
@@ -53,13 +46,10 @@ struct MatchesView: View {
                     .foregroundColor(.white)
                     .padding(.bottom, 2)
                 
-                
             }
             .frame(width: 100)
             .padding()
-            
         }
-        
         .frame(width: 350, height: 140)
         .background(Color(0x2D333B))
         .cornerRadius(20)

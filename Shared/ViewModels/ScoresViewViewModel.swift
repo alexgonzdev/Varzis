@@ -6,28 +6,33 @@ final class ScoresViewViewModel: ObservableObject {
     @Published var scores: [GameInfo] = []
     @Published var isLoading = false
     
-    func getScores() {
-        NetworkManager.shared.getMatches { [self] result in
-            DispatchQueue.main.async {
+    var network: Networking
+    init(networking: Networking) {
+        network = networking
+    }
+    
+    func fetchScores() {
+        let dateFormatter = DateFormatter()
+        let date = Date()
+        dateFormatter.dateFormat = "2022-01-19"
+        let newDate = dateFormatter.string(from: date)
+        network.fetch(HomeMatchesEndpoint(newDate: newDate)) { [self] (result: Result<Matches, APError>) in
+            DispatchQueue.main.async { [self] in
                 switch result {
-                case .success(let gameresults):
-                    self.scores = gameresults
+                    
+                case .success(let games):
+                    
+                    self.scores = games.data
+                    
+                    self.scores.sort(by: {
+                        $0.status > $1.status
+                    })
                     
                 case .failure(let error):
-                    switch error {
-                    case .invalidURL:
-                            
-                        print("There is an error trying to reach the server. If this persists, please contact support.")
-                    case .invalidData:
-                        print("Unable to complete your request at this time. Please check your internet connection.")
-                    case .invalidResponse:
-                        print("Invalid response from the server. Please try again or contact support.")
-                    case .unableToComplete:
-                        print("The data received from the server was invalid. Please try again or contact support.")
-                    }
+                   // //print(result)
+                    print(error.localizedDescription)
                 }
             }
-            
         }
     }
 }

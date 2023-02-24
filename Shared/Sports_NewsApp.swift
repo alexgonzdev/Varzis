@@ -1,10 +1,3 @@
-//
-//  Sports_NewsApp.swift
-//  Shared
-//
-//  Created by Alex Gonzalez on 12/15/21.
-//
-
 import SwiftUI
 
 @main
